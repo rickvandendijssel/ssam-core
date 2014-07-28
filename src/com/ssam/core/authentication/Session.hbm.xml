@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 25, 2014 3:46:14 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ssam.core.authentication.Session" table="SESSION">
+        <id name="sessionID" type="java.lang.Long">
+            <column name="SESSIONID" />
+            <generator class="assigned" />
+        </id>
+        <property name="token" type="java.lang.String">
+            <column name="TOKEN" />
+        </property>
+        <property name="ip" type="java.lang.String">
+            <column name="IP" />
+        </property>
+        <property name="lastActivity" type="java.util.Date">
+            <column name="LASTACTIVITY" />
+        </property>
+        <many-to-one name="user" class="com.ssam.core.authentication.User" fetch="join">
+            <column name="USER" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
