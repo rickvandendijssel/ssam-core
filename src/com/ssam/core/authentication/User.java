@@ -14,6 +14,9 @@ public class User {
 	private String email;
 	private String password;
 	private UserType type;
+	private String firstName;
+	private String middleName;
+	private String lastName;
 	private String zipcode;
 	private String address;
 	private String houseNumber;
@@ -55,6 +58,24 @@ public class User {
 	
 	public void setType(UserType type) {
 		this.type = type;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getMiddleName() {
+		return middleName;
+	}
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	public String getPassword() {
 		return password;

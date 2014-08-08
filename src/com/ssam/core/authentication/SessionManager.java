@@ -3,8 +3,9 @@ package com.ssam.core.authentication;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
 
+import com.ssam.core.authentication.datafilter.SessionDataFilter;
+import com.ssam.core.authentication.datafilter.SessionListDataFilter;
 import com.ssam.core.main.CoreFactory;
 import com.ssam.core.util.HibernateUtil;
 
@@ -12,9 +13,10 @@ public class SessionManager {
 	
 	private HibernateUtil hibernateUtil = CoreFactory.getCoreFactory().getHibernateUtil();
 	
-	public List<Session> getSessionList(){
+	public List<Session> getSessionList(SessionListDataFilter filter){
 		org.hibernate.Session dbSession = hibernateUtil.createNewSessionAndStartTransaction();
 		Criteria criteria = dbSession.createCriteria(Session.class);
+		filter.setFilter(criteria);
 		@SuppressWarnings("unchecked")
 		List<Session> result = (List<Session>) criteria.list();
 		hibernateUtil.commitTransaction(dbSession);
@@ -28,10 +30,10 @@ public class SessionManager {
 		return sessionID;
 	}
 	
-	public Session getSessionByToken(String token){
+	public Session getSession(SessionDataFilter filter){
 		org.hibernate.Session dbSession = hibernateUtil.createNewSessionAndStartTransaction();
 		Criteria criteria = dbSession.createCriteria(Session.class);
-		criteria.add(Restrictions.eq("TOKEN", token));
+		filter.setFilter(criteria);
 		Session session = (Session)criteria.uniqueResult();
 		hibernateUtil.commitTransaction(dbSession);
 		return session;
@@ -48,5 +50,4 @@ public class SessionManager {
 		dbSession.update(session);
 		hibernateUtil.commitTransaction(dbSession);
 	}
-
 }

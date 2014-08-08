@@ -3,8 +3,9 @@ package com.ssam.core.authentication;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
 
+import com.ssam.core.authentication.datafilter.GroupDataFilter;
+import com.ssam.core.authentication.datafilter.GroupListDataFilter;
 import com.ssam.core.main.CoreFactory;
 import com.ssam.core.util.HibernateUtil;
 
@@ -21,24 +22,20 @@ public class GroupManager {
 		return result;
 	}
 	
-	public List<Group> getGroupList(GroupListFilter groupListFilter){
+	public List<Group> getGroupList(GroupListDataFilter filter){
 		org.hibernate.Session dbSession = hibernateUtil.createNewSessionAndStartTransaction();
 		Criteria criteria = dbSession.createCriteria(Group.class);
-		if(groupListFilter.getLikeName()!= null){
-			criteria.add(Restrictions.like("NAME", groupListFilter.getLikeName()));
-		}
+		filter.setFilter(criteria);
 		@SuppressWarnings("unchecked")
 		List<Group> result = (List<Group>) criteria.list();
 		hibernateUtil.commitTransaction(dbSession);
 		return result;
 	}
 	
-	public Group getGroup(GroupFilter groupFilter){
+	public Group getGroup(GroupDataFilter filter){
 		org.hibernate.Session dbSession = hibernateUtil.createNewSessionAndStartTransaction();
 		Criteria criteria = dbSession.createCriteria(Group.class);
-		if(groupFilter.getId() != null){
-			criteria.add(Restrictions.eq("GROUPID", groupFilter.getId()));
-		}
+		filter.setFilter(criteria);
 		Group result = (Group) criteria.uniqueResult();
 		hibernateUtil.commitTransaction(dbSession);
 		return result;
@@ -63,26 +60,4 @@ public class GroupManager {
 		hibernateUtil.commitTransaction(dbSession);
 	}
 	
-	public class GroupListFilter{
-		private String likeName;
-
-		public String getLikeName() {
-			return likeName;
-		}
-		public void setLikeName(String likeName) {
-			this.likeName = likeName;
-		}
-	}
-	
-	public class GroupFilter{
-		private Long id;
-		
-		public Long getId() {
-			return id;
-		}
-		public void setId(Long id) {
-			this.id = id;
-		}
-	}
-
 }
