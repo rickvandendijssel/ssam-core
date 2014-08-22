@@ -7,7 +7,7 @@ public class Permission {
 	/*
 	 * All the primaire data from POJO Permission
 	 */
-	private Integer permissionID;
+	private Long permissionID;
 	private PermissionType permissionType;
 	
 	/*
@@ -15,11 +15,11 @@ public class Permission {
 	 */
 	private List<Group> groupList;
 
-	public Integer getPermissionID() {
+	public Long getPermissionID() {
 		return permissionID;
 	}
 
-	public void setPermissionID(Integer permissionID) {
+	public void setPermissionID(Long permissionID) {
 		this.permissionID = permissionID;
 	}
 

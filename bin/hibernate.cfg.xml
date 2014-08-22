@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
  <session-factory>
   <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
@@ -10,8 +10,9 @@
   <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
   <property name="hibernate.show_sql">true</property>
   <property name="hibernate.current_session_context_class">managed</property>
-  <property name="hibernate.connection.datasource">java:jboss/apiDB</property>
   <mapping class="com.ssam.core.authentication.Session" resource="com/ssam/core/authentication/Session.hbm.xml"/>
   <mapping class="com.ssam.core.authentication.User" resource="com/ssam/core/authentication/User.hbm.xml"/>
+  <mapping class="com.ssam.core.authentication.User" resource="com/ssam/core/authentication/Group.hbm.xml"/>
+  <mapping class="com.ssam.core.authentication.User" resource="com/ssam/core/authentication/Permission.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>
