@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 20, 2014 2:27:49 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ssam.core.authentication.Permission" table="PERMISSION">
+        <id name="permissionID" type="java.lang.Long">
+            <column name="PERMISSIONID" />
+            <generator class="native" />
+        </id>
+        <property name="permissionType">
+            <column name="PERMISSIONTYPE" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="type">12</param>
+                <param name="enumClass">com.ssam.core.authentication.PermissionType</param>
+            </type>
+        </property>
+        <list name="groupList" inverse="false" table="GROUPPERMISSION" lazy="true">
+            <key>
+                <column name="PERMISSIONID" />
+            </key>
+            <list-index></list-index>
+            <many-to-many class="com.ssam.core.authentication.Group" column="GROUPID" />
+        </list>
+    </class>
+</hibernate-mapping>

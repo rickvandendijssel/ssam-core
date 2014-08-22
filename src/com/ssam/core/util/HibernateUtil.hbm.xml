@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 20, 2014 2:27:49 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ssam.core.util.HibernateUtil" table="HIBERNATEUTIL">
+        <id name="sessionFactory" type="org.hibernate.SessionFactory" access="field">
+            <column name="SESSIONFACTORY" />
+            <generator class="assigned" />
+        </id>
+    </class>
+</hibernate-mapping>
