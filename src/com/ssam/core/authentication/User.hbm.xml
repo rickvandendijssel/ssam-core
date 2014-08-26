@@ -78,11 +78,11 @@
             <list-index></list-index>
             <many-to-many class="com.ssam.core.authentication.Group" column="GROUPID" />
         </list>
-        <list name="secureToken" inverse="false" table="USERSECURETOKEN" lazy="true">
+        <list name="secureTokenList" inverse="false" table="USERSECURETOKEN" lazy="true">
             <key>
                 <column name="USERID" />
             </key>
-            <list-index></list-index>
+            <list-index column="USERID_IDX"></list-index>
             <element type="java.lang.String">
                 <column name="SECURETOKEN" />
             </element>

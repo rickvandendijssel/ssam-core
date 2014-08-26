@@ -37,5 +37,13 @@ public class CoreFactory {
 	public Locale getLocale(){
 		return locale;
 	}
+	
+	public void openConnection(){
+		hibernateUtil.createNewSession();
+	}
+	
+	public void closeConnection(){
+		hibernateUtil.closeSession();
+	}
 
 }

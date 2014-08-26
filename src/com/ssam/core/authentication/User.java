@@ -31,7 +31,7 @@ public class User {
 	 */
 	private List<String> notificationEmailList;
 	private List<Group> groupList;
-	private List<String> secureToken;
+	private List<String> secureTokenList;
 	private List<Session> sessionList;
 	
 	/*
@@ -143,11 +143,11 @@ public class User {
 	public void setGroupList(List<Group> groupList) {
 		this.groupList = groupList;
 	}
-	public List<String> getSecureToken() {
-		return secureToken;
+	public List<String> getSecureTokenList() {
+		return secureTokenList;
 	}
-	public void setSecureToken(List<String> secureToken) {
-		this.secureToken = secureToken;
+	public void setSecureTokenList(List<String> secureTokenList) {
+		this.secureTokenList = secureTokenList;
 	}
 	public List<Session> getSessionList() {
 		return sessionList;

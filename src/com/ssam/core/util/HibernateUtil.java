@@ -12,6 +12,8 @@ public class HibernateUtil {
 
 	private SessionFactory sessionFactory;
 	
+	private Session session;
+	
 	public HibernateUtil(){
 	    Configuration configuration = new Configuration();
 	    configuration.configure();
@@ -19,30 +21,29 @@ public class HibernateUtil {
 	    sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 	}
 	
-	private Session createNewSession(){
-		Session session = sessionFactory.openSession();
+	public void createNewSession(){
+		session = sessionFactory.openSession();
 		session.setFlushMode(FlushMode.MANUAL);
 		ManagedSessionContext.bind(session);
-		return session;
 	}
 	
-	private void startNewTransaction(Session session){
+	public void startNewTransaction(){
 		session.beginTransaction();
 	}
 	
-	public Session createNewSessionAndStartTransaction(){
-		Session session = createNewSession();
-		startNewTransaction(session);
-		return session;
-	}
-	
-	public void commitTransaction(Session session){
+	public void commitTransaction(){
 		ManagedSessionContext.unbind(sessionFactory);
 		session.flush();
 		session.getTransaction().commit();
+	}
+	
+	public void closeSession(){
 		session.close();
 	}
 	
+	public Session getSession(){
+		return this.session;
+	}
 	
 	
 }
