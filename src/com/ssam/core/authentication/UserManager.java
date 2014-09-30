@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 
+import com.lambdaworks.crypto.SCryptUtil;
+import com.ssam.core.authentication.datacheck.UserDataCheck;
 import com.ssam.core.authentication.datafilter.UserDataFilter;
 import com.ssam.core.authentication.datafilter.UserListDataFilter;
+import com.ssam.core.main.AbstractManager;
 import com.ssam.core.main.CoreFactory;
 import com.ssam.core.util.HibernateUtil;
 
-public class UserManager {
+public class UserManager extends AbstractManager {
 	
 	private HibernateUtil hibernateUtil = CoreFactory.getCoreFactory().getHibernateUtil();
 	
@@ -35,18 +38,40 @@ public class UserManager {
 	}
 	
 	public Long addUser(User user){
-		org.hibernate.Session dbSession = hibernateUtil.getSession();
-		hibernateUtil.startNewTransaction();
-		Long userID = (Long)dbSession.save(user);
-		hibernateUtil.commitTransaction();
-		return userID;
+		UserDataCheck dataCheck = new UserDataCheck(user);
+		if(dataCheck.check()){
+			String password = user.getPassword();
+			String hashedPassword = SCryptUtil.scrypt(password, 16384, 8, 1);
+			user.setPassword(hashedPassword);
+			org.hibernate.Session dbSession = hibernateUtil.getSession();
+			hibernateUtil.startNewTransaction();
+			Long userID = (Long)dbSession.save(user);
+			hibernateUtil.commitTransaction();
+			return userID;
+		}else{
+			this.error = dataCheck.getError();
+		}
+		return null;
 	}
 	
-	public void updateUser(User user){
-		org.hibernate.Session dbSession = hibernateUtil.getSession();
-		hibernateUtil.startNewTransaction();
-		dbSession.update(user);
-		hibernateUtil.commitTransaction();
+	public Boolean updateUser(User user, Boolean passwordReset){
+		UserDataCheck dataCheck = new UserDataCheck(user);
+		if(dataCheck.check()){
+			if(passwordReset){
+				String password = user.getPassword();
+				String hashedPassword = SCryptUtil.scrypt(password, 16384, 8, 1);
+				user.setPassword(hashedPassword);
+			}
+			org.hibernate.Session dbSession = hibernateUtil.getSession();
+			hibernateUtil.startNewTransaction();
+			dbSession.update(user);
+			hibernateUtil.commitTransaction();
+			return true;
+		}else{
+			this.error = dataCheck.getError();
+			return false;
+		}
+
 	}
 	
 }

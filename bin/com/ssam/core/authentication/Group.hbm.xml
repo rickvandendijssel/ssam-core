@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 20, 2014 2:27:49 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.ssam.core.authentication.Group" table="GROUP">
+    <class name="com.ssam.core.authentication.Group" table="UGROUP">
         <id name="groupID" type="java.lang.Long">
             <column name="GROUPID" />
             <generator class="native" />
@@ -11,19 +11,17 @@
         <property name="name" type="java.lang.String">
             <column name="NAME" />
         </property>
-        <list name="userList" inverse="false" table="USERGROUP" lazy="true">
+        <bag name="userList" inverse="false" table="USERGROUP" lazy="true">
             <key>
                 <column name="GROUPID" />
             </key>
-            <list-index></list-index>
             <many-to-many class="com.ssam.core.authentication.User" column="USERID"/>
-        </list>
-        <list name="permissionList" inverse="false" table="GROUPPERMISSION" lazy="true">
+        </bag>
+        <bag name="permissionList" inverse="false" table="GROUPPERMISSION" lazy="true">
             <key>
                 <column name="GROUPID" />
             </key>
-            <list-index></list-index>
             <many-to-many class="com.ssam.core.authentication.Permission" column="PERMISSIONID" />
-        </list>
+        </bag>
     </class>
 </hibernate-mapping>

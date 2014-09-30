@@ -1,6 +1,7 @@
 package com.ssam.core.authentication.datafilter;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import com.ssam.core.config.Country;
@@ -103,31 +104,31 @@ public class UserListDataFilter extends AbstractDataFilter {
 	public void setFilter(Criteria criteria) {
 		super.setFilter(criteria);
 		if(likeFirstName != null){
-			criteria.add(Restrictions.like("firstName", likeFirstName));
+			criteria.add(Restrictions.like("firstName", likeFirstName, MatchMode.ANYWHERE));
 		}
 		if(likeMiddleName != null){
-			criteria.add(Restrictions.like("middleName", likeMiddleName));
+			criteria.add(Restrictions.like("middleName", likeMiddleName, MatchMode.ANYWHERE));
 		}
 		if(likeLastName != null){
-			criteria.add(Restrictions.like("lastName", likeLastName));
+			criteria.add(Restrictions.like("lastName", likeLastName, MatchMode.ANYWHERE));
 		}
 		if(likeEmail != null){
-			criteria.add(Restrictions.like("email", likeEmail));
+			criteria.add(Restrictions.like("email", likeEmail, MatchMode.ANYWHERE));
 		}
 		if(likeZipcode != null){
-			criteria.add(Restrictions.like("zipcode", likeZipcode));
+			criteria.add(Restrictions.like("zipcode", likeZipcode, MatchMode.ANYWHERE));
 		}
 		if(likeAddress != null){
-			criteria.add(Restrictions.like("address", likeAddress));
+			criteria.add(Restrictions.like("address", likeAddress, MatchMode.ANYWHERE));
 		}
 		if(likeHouseNumber != null){
-			criteria.add(Restrictions.like("housenumber", likeHouseNumber));
+			criteria.add(Restrictions.like("houseNumber", likeHouseNumber, MatchMode.ANYWHERE));
 		}
 		if(likePhoneNumber != null){
-			criteria.add(Restrictions.like("phonenumber", likePhoneNumber));
+			criteria.add(Restrictions.like("phoneNumber", likePhoneNumber, MatchMode.ANYWHERE));
 		}
 		if(likeResidence != null){
-			criteria.add(Restrictions.like("residence", likeResidence));
+			criteria.add(Restrictions.like("residence", likeResidence, MatchMode.ANYWHERE));
 		}
 		if(country != null){
 			criteria.add(Restrictions.eq("country", country));

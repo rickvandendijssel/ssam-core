@@ -39,7 +39,7 @@
         <property name="houseNumber" type="java.lang.String">
             <column name="HOUSENUMBER" />
         </property>
-        <property name="phoneNumber" type="java.lang.Long">
+        <property name="phoneNumber" type="java.lang.String">
             <column name="PHONENUMBER" />
         </property>
         <property name="residence" type="java.lang.String">
@@ -71,28 +71,25 @@
                 <column name="EMAIL" />
             </element>
         </list>
-        <list name="groupList" inverse="false" table="USERGROUP" lazy="true">
+        <bag name="groupList" inverse="false" table="USERGROUP" lazy="true">
             <key>
                 <column name="USERID" />
             </key>
-            <list-index></list-index>
             <many-to-many class="com.ssam.core.authentication.Group" column="GROUPID" />
-        </list>
-        <list name="secureTokenList" inverse="false" table="USERSECURETOKEN" lazy="true">
+        </bag>
+        <bag name="secureTokenList" inverse="false" table="USERSECURETOKEN" lazy="true">
             <key>
                 <column name="USERID" />
             </key>
-            <list-index column="USERID_IDX"></list-index>
             <element type="java.lang.String">
                 <column name="SECURETOKEN" />
             </element>
-        </list>
-        <list name="sessionList" inverse="false" table="SESSION" lazy="true">
+        </bag>
+        <bag name="sessionList" inverse="false" table="SESSION" lazy="true">
             <key>
                 <column name="USERID" />
             </key>
-            <list-index></list-index>
             <one-to-many class="com.ssam.core.authentication.Session" />
-        </list>
+        </bag>
     </class>
 </hibernate-mapping>

@@ -15,12 +15,11 @@
                 <param name="enumClass">com.ssam.core.authentication.PermissionType</param>
             </type>
         </property>
-        <list name="groupList" inverse="false" table="GROUPPERMISSION" lazy="true">
+        <bag name="groupList" inverse="false" table="GROUPPERMISSION" lazy="true">
             <key>
                 <column name="PERMISSIONID" />
             </key>
-            <list-index></list-index>
             <many-to-many class="com.ssam.core.authentication.Group" column="GROUPID" />
-        </list>
+        </bag>
     </class>
 </hibernate-mapping>

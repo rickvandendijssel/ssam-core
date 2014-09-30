@@ -20,7 +20,7 @@ public class User {
 	private String zipcode;
 	private String address;
 	private String houseNumber;
-	private Long phoneNumber;
+	private String phoneNumber;
 	private String residence;
 	private Country country;
 	private Language language;
@@ -101,10 +101,10 @@ public class User {
 	public void setHouseNumber(String houseNumber) {
 		this.houseNumber = houseNumber;
 	}
-	public Long getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(Long phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	public String getResidence() {
@@ -155,5 +155,4 @@ public class User {
 	public void setSessionList(List<Session> sessionList) {
 		this.sessionList = sessionList;
 	}
-	
 }

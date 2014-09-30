@@ -1,5 +1,6 @@
 package com.ssam.core.authentication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Group {
@@ -13,8 +14,8 @@ public class Group {
 	/*
 	 * All the collections from POJO UserGroup
 	 */
-	private List<User> userList;
-	private List<Permission> permissionList;
+	private List<User> userList = new ArrayList<User>();
+	private List<Permission> permissionList = new ArrayList<Permission>();
 	
 	/*
 	 * All the set and get function from POJO UserGroup

@@ -1,6 +1,7 @@
 package com.ssam.core.authentication.datafilter;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import com.ssam.core.main.AbstractDataFilter;
@@ -20,7 +21,7 @@ public class GroupListDataFilter extends AbstractDataFilter {
 	public void setFilter(Criteria criteria) {
 		super.setFilter(criteria);
 		if(likeName != null){
-			criteria.add(Restrictions.like("name", likeName));
+			criteria.add(Restrictions.like("name", likeName,MatchMode.ANYWHERE));
 		}
 	}
 
